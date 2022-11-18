@@ -5,8 +5,7 @@ from const import TEMP_FOLDER
 from ffmconverter import convert_webm_to_mp4, merge_audio_to_mp4
 from utils import delete_temp_current_video_folder
 
-# link = input("Enter YouTube video URL: ")
-link = "https://youtu.be/MToMx6RCW-M"
+link = input("Enter YouTube video URL: ")
 
 yt = YouTube(link, on_progress_callback=on_progress)
 filename = yt.title
