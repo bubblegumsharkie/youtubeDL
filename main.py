@@ -3,6 +3,7 @@ from pytube.cli import on_progress
 
 from const import TEMP_FOLDER
 from ffmconverter import convert_webm_to_mp4, merge_audio_to_mp4
+from utils import delete_temp_current_video_folder
 
 # link = input("Enter YouTube video URL: ")
 link = "https://youtu.be/MToMx6RCW-M"
@@ -29,3 +30,7 @@ print('✅ .webm to .mp4 converted')
 print('🟡 merging audio started')
 merge_audio_to_mp4(filename)
 print('✅ audio merged')
+
+print('🟡 clearing temp folder')
+delete_temp_current_video_folder(TEMP_FOLDER)
+print('✅ all temp files are gone')
