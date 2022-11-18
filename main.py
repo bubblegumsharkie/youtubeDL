@@ -1,6 +1,7 @@
 from pytube import YouTube
 from pytube.cli import on_progress
 
+from const import TEMP_FOLDER
 from ffmconverter import convert_webm_to_mp4, merge_audio_to_mp4
 
 # link = input("Enter YouTube video URL: ")
@@ -13,18 +14,18 @@ print(filename)
 ytVideoDownload = yt.streams.order_by('resolution').desc().first()
 ytAudioDownload = yt.streams.get_audio_only()
 
-print('Video downloading started 🟡')
-ytVideoDownload.download(output_path="./downloads/", filename="video.webm")
-print('Video downloaded ✅')
+# print('🟡 Video downloading started')
+# ytVideoDownload.download(output_path=TEMP_FOLDER, filename="video.webm")
+# print('✅ Video downloaded')
 
-print('Audio downloading started 🟡')
-ytAudioDownload.download(output_path="./downloads/", filename="audio.mp4")
-print('Audio downloaded ✅')
+# print('🟡 Audio downloading started')
+# ytAudioDownload.download(output_path=TEMP_FOLDER, filename="audio.mp4")
+# print('✅ Audio downloaded')
 
-print('.webm to .mp4 conversion started 🟡')
-convert_webm_to_mp4("video")
-print('.webm to .mp4 converted ✅')
+# print('🟡 .webm to .mp4 conversion started')
+# convert_webm_to_mp4()
+# print('✅ .webm to .mp4 converted')
 
-print('merging audio started 🟡')
+print('🟡 merging audio started')
 merge_audio_to_mp4(filename)
-print('audio merged ✅')
+print('✅ audio merged')
