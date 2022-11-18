@@ -10,23 +10,21 @@ yt = YouTube(link, on_progress_callback=on_progress)
 filename = yt.title
 print(filename)
 
-# ytVideoDownload = yt.streams.order_by('resolution').desc().first()
-# ytAudioDownload = yt.streams.get_audio_only()
+ytVideoDownload = yt.streams.order_by('resolution').desc().first()
+ytAudioDownload = yt.streams.get_audio_only()
 
+print('Video downloading started 🟡')
+ytVideoDownload.download(output_path="./downloads/", filename="video.webm")
+print('Video downloaded ✅')
 
-# print('Video downloading started 🟡')
-# ytVideoDownload.download(output_path="./downloads/")
-# print('Video downloaded ✅')
-#
-# print('Audio downloading started 🟡')
-# ytAudioDownload.download(output_path="./downloads/", filename_prefix='audio_')
-# print('Audio downloaded ✅')
+print('Audio downloading started 🟡')
+ytAudioDownload.download(output_path="./downloads/", filename="audio.mp4")
+print('Audio downloaded ✅')
 
 print('.webm to .mp4 conversion started 🟡')
-convert_webm_to_mp4(r'test.webm', r'test.mp4')
+convert_webm_to_mp4("video")
 print('.webm to .mp4 converted ✅')
 
-
-# print('merging audio started 🟡')
-# merge_audio_to_mp4(r'test.webm', r'test.mp4')
-# print('audio merged ✅')
+print('merging audio started 🟡')
+merge_audio_to_mp4(filename)
+print('audio merged ✅')
