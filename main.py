@@ -1,35 +1,19 @@
+import shlex
+
 from pytube import YouTube
 from pytube.cli import on_progress
 
-from const import TEMP_FOLDER
 from ffmconverter import convert_webm_to_mp4, merge_audio_to_mp4
-from utils import delete_temp_current_video_folder
+from service import get_youtube_videos
+from utils import delete_temp_current_video_folder, move_to_output_folder
 
 link = input("Enter YouTube video URL: ")
-
 yt = YouTube(link, on_progress_callback=on_progress)
-filename = yt.title
-print(filename)
+filename = shlex.quote(yt.title)
 
-ytVideoDownload = yt.streams.order_by('resolution').desc().first()
-ytAudioDownload = yt.streams.get_audio_only()
-
-print('🟡 Video downloading started')
-ytVideoDownload.download(output_path=TEMP_FOLDER, filename="video.webm")
-print('✅ Video downloaded')
-
-print('🟡 Audio downloading started')
-ytAudioDownload.download(output_path=TEMP_FOLDER, filename="audio.mp4")
-print('✅ Audio downloaded')
-
-print('🟡 .webm to .mp4 conversion started')
+get_youtube_videos(yt)
 convert_webm_to_mp4()
-print('✅ .webm to .mp4 converted')
+merge_audio_to_mp4()
+move_to_output_folder(filename)
 
-print('🟡 merging audio started')
-merge_audio_to_mp4(filename)
-print('✅ audio merged')
-
-print('🟡 clearing temp folder')
-delete_temp_current_video_folder(TEMP_FOLDER)
-print('✅ all temp files are gone')
+delete_temp_current_video_folder()
