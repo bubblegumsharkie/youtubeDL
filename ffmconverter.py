@@ -6,7 +6,7 @@ from const import TEMP_FOLDER
 def convert_webm_to_mp4():
     print('🟡 .webm to .mp4 conversion started')
     # ffmpeg -i /downloads/test.webm /downloads/test.mp4
-    command = 'ffmpeg -i ' + TEMP_FOLDER + 'video.webm -crf 9 -c:v libx264 ' + TEMP_FOLDER + 'video.mp4'
+    command = 'ffmpeg -i ' + TEMP_FOLDER + 'video.webm -crf 17 -c:v libx264 ' + TEMP_FOLDER + 'video.mp4'
     subprocess.run(command, shell=True)
     print('✅ .webm to .mp4 converted')
 
