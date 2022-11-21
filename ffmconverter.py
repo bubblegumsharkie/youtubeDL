@@ -1,12 +1,12 @@
 import subprocess
 
-from const import TEMP_FOLDER
+from const import TEMP_FOLDER, DOWNLOADED_FILE, DOWNLOADED_AUDIO,CONVERTED_VIDEO, OUTPUT_FILE
 
 
 def convert_webm_to_mp4():
     print('🟡 .webm to .mp4 conversion started')
     # ffmpeg -i /downloads/test.webm /downloads/test.mp4
-    command = 'ffmpeg -i ' + TEMP_FOLDER + 'video.webm -crf 17 -c:v libx264 ' + TEMP_FOLDER + 'video.mp4'
+    command = 'ffmpeg -i ' + TEMP_FOLDER + DOWNLOADED_FILE + ' -crf 17 -c:v libx264 ' + TEMP_FOLDER + CONVERTED_VIDEO
     subprocess.run(command, shell=True)
     print('✅ .webm to .mp4 converted')
 
@@ -14,7 +14,7 @@ def convert_webm_to_mp4():
 def merge_audio_to_mp4():
     print('🟡 merging audio started')
     # ffmpeg -i video.mp4 -i audio.wav -c:v copy -c:a aac output.mp4
-    command = "ffmpeg -i " + TEMP_FOLDER + "video.mp4 -i " \
-              + TEMP_FOLDER + "audio.mp4 -c:v copy -c:a aac " + TEMP_FOLDER + "output.mp4"
+    command = "ffmpeg -i " + TEMP_FOLDER + CONVERTED_VIDEO + " -i " \
+              + TEMP_FOLDER + DOWNLOADED_AUDIO + " -c:v copy -c:a aac " + TEMP_FOLDER + OUTPUT_FILE
     subprocess.run(command, shell=True)
     print('✅ audio merged')
