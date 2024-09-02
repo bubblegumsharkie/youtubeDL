@@ -5,8 +5,8 @@ from const import TEMP_FOLDER, DOWNLOADED_FILE, DOWNLOADED_AUDIO,CONVERTED_VIDEO
 
 def convert_webm_to_mp4():
     print('🟡 .webm to .mp4 conversion started')
-    # ffmpeg -i /downloads/test.webm /downloads/test.mp4
-    command = 'ffmpeg -i ' + TEMP_FOLDER + DOWNLOADED_FILE + ' -crf 17 -c:v libx264 ' + TEMP_FOLDER + CONVERTED_VIDEO
+    command = 'ffmpeg -i ' + TEMP_FOLDER + DOWNLOADED_FILE + ' -crf 21 -c:v libx264 ' + TEMP_FOLDER + CONVERTED_VIDEO
+    # command = 'ffmpeg -i ' + TEMP_FOLDER + DOWNLOADED_FILE + ' -c:v hevc_videotoolbox -q:v 65 -tag:v hvc1 ' + TEMP_FOLDER + CONVERTED_VIDEO
     subprocess.run(command, shell=True)
     print('✅ .webm to .mp4 converted')
 
